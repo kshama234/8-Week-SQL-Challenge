@@ -29,5 +29,20 @@ insert into menu (product_id,product_name,price) values
 insert into members (customer_id,join_date) values
 (1,'2021-01-07'),(2,'2021-01-09');
 
-select * from menu;
-select * from members;
+------------------------------------------------------------------------------------------------------------------
+
+/*Question 1: What is the total amount each customer spent at the restaurant?*/
+select customer_id,sum(price) as total_amount_spent from sales s 
+join menu m on s.product_id=m.product_id
+group by customer_id;
+
+------------------------------------------------------------------------------------------------------------------
+/*Question 2: How many days has each customer visited the restaurant?*/
+
+select customer_id,count(distinct order_date) as number_of_days_visited 
+from sales group by customer_id;
+
+------------------------------------------------------------------------------------------------------------------
+
+/* Question 3: What was the first item from the menu purchased by each customer? */
+
