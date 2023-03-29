@@ -1,0 +1,33 @@
+
+create database dannys_diner;
+use dannys_diner;
+create table sales(
+customer_id varchar(1),
+order_date date,
+product_id int
+);
+create table members(
+customer_id varchar(1),
+join_date timestamp
+);
+create table menu(
+product_id integer,
+product_name varchar(5),
+price integer
+);
+
+insert into sales (customer_id,order_date,product_id) values
+('A','2021-01-01',1),('A','2021-01-01',2),('A','2021-01-07',2),
+('A','2021-01-10',3),('A','2021-01-11',3),('A','2021-01-11',3),
+('B','2021-01-01',2),('B','2021-01-02',2),('B','2021-01-04',1),
+('B','2021-01-11',1),('B','2021-01-16',3),('B','2021-02-01',3),
+('C','2021-01-01',3),('C','2021-01-01',3),('C','2021-01-07',3);
+
+insert into menu (product_id,product_name,price) values
+(1,'sush',10),(2,'curry',15),(3,'ramen',12);
+
+insert into members (customer_id,join_date) values
+(1,'2021-01-07'),(2,'2021-01-09');
+
+select * from menu;
+select * from members;
