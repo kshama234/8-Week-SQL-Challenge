@@ -71,12 +71,37 @@ select distinct customer_id, first_value(product_name) over(partition by custome
 from sales s join menu m
 on s.product_id=m.product_id;
 
+------------------------------------------------------------------------------------------------------------------
+
+
 /* Question 4: What is the most purchased item on the menu and how many times was it purchased by all customers? */
 
 select product_name as most_purchased_item, count(*) as num_times from sales s join menu m
 on s.product_id=m.product_id 
 group by s.product_id order by num_times desc limit 1;
 
+------------------------------------------------------------------------------------------------------------------
+
+
 /* Question 5: Which item was the most popular for each customer? */
+
+WITH order_priority AS 
+		(
+			WITH ordered_items AS 
+				(
+                SELECT customer_id, product_name, COUNT(*) AS num_times 
+				FROM sales s JOIN menu m ON
+				s.product_id=m.product_id
+				GROUP BY customer_id, product_name
+				)
+			SELECT *, DENSE_RANK() OVER (PARTITION BY customer_id ORDER BY num_times desc) AS priority 
+			FROM  ordered_items
+		) 
+SELECT customer_id, product_name as most_popular_item FROM order_priority WHERE priority=1;
+
+------------------------------------------------------------------------------------------------------------------
+
+
+/* Question 6: Which item was purchased first by the customer after they became a member? */
 
 
