@@ -15,7 +15,6 @@ Danny has shared with you 3 key datasets for this case study:
 - menu
 - members
 You can inspect the entity relationship diagram and example data below.
-![image](https://user-images.githubusercontent.com/61552757/229301161-e15d9839-62fb-48c8-b183-525ffcb2fb31.png)
 ![image](https://user-images.githubusercontent.com/61552757/229301348-81d90d84-b139-429a-8a41-baa43b9d8e08.png)
 
 
