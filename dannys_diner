@@ -107,7 +107,7 @@ SELECT customer_id, product_name as most_popular_item FROM order_priority WHERE 
 WITH order_details AS (SELECT s.customer_id as customer_id, product_name, 
 RANK() OVER(PARTITION BY s.customer_id ORDER BY order_date) AS ranking FROM sales s 
 JOIN members m ON s.customer_id=m.customer_id 
-JOIN menu ON s.product_id=menu.product_id WHERE join_date<=order_date)
+JOIN menu ON s.product_id=menu.product_id WHERE join_date<order_date)
 SELECT customer_id,product_name FROM order_detailS WHERE ranking=1;
 
 
@@ -130,7 +130,16 @@ JOIN members m ON s.customer_id=m.customer_id
 JOIN menu ON s.product_id=menu.product_id WHERE join_date>order_date 
 GROUP BY  s.customer_id ORDER BY s.customer_id;
 
-------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 /* Question 9: If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have? *?
+
+SELECT s.customer_id as customer_id, 
+SUM(IF(s.product_id=2, 20*price, 10*price)) AS points FROM sales s 
+JOIN menu m ON s.product_id=m.product_id 
+GROUP BY customer_id;
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/* Question 10: In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January? */
 
